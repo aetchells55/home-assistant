@@ -1,0 +1,9 @@
+type: grid
+columns: 2
+square: true
+title: Heating and Air Conditioning
+cards:
+  - type: thermostat
+    entity: climate.downstairs
+  - type: thermostat
+    entity: climate.upstairs
