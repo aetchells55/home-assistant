@@ -1,0 +1,21 @@
+type: conditional
+conditions:
+  - entity: sensor.mail_usps_mail
+    state_not: '0'
+card:
+  type: 'custom:mail-and-packages-card'
+  name: You've Got Mail
+  updated: sensor.mail_updated
+  details: true
+  image: false
+  deliveries_message: sensor.mail_deliveries_message
+  packages_delivered: sensor.mail_packages_delivered
+  packages_in_transit: sensor.mail_packages_in_transit
+  fedex_packages: sensor.mail_fedex_packages
+  ups_packages: sensor.mail_ups_packages
+  usps_packages: sensor.mail_usps_packages
+  amazon_packages: sensor.mail_amazon_packages
+  usps_mail: sensor.mail_usps_mail
+  camera_entity: camera.mail_usps
+  camera: true
+  gif_sensor: sensor.mail_image_url
