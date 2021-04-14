@@ -1,0 +1,17 @@
+type: entities
+entities:
+  - type: 'custom:fold-entity-row'
+    head: light.basement_lights
+    entities:
+      - entity: light.tuyabasement1
+      - entity: light.tuyabasement2
+      - entity: light.tuyabasement3
+      - entity: light.tuyabasement4
+      - entity: light.tuyabasement5
+      - entity: light.tuyabasement6
+      - entity: light.tuyabasement7
+      - entity: light.tuyabasement8
+      - entity: light.tuyabasementutility
+show_header_toggle: true
+title: Individual Lights
+state_color: true
