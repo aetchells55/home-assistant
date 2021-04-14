@@ -1,0 +1,8 @@
+type: grid
+columns: 2
+title: Climate
+cards:
+  - type: thermostat
+    entity: climate.downstairs
+  - type: thermostat
+    entity: climate.upstairs
