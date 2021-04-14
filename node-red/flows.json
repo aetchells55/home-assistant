@@ -271,37 +271,6 @@
         ]
     },
     {
-        "id": "57ffa75f.9aafb8",
-        "type": "change",
-        "z": "3060a515.ac9efa",
-        "name": "Just turn on the lights",
-        "rules": [
-            {
-                "t": "delete",
-                "p": "payload",
-                "pt": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 560,
-        "y": 360,
-        "wires": [
-            [
-                "36721f67.7051d",
-                "628086a2.47a498",
-                "852e39a4.33e5c8",
-                "cb046e59.8a40e",
-                "4390897a.1b8968",
-                "f2b932b0.216b6",
-                "6f4cb0a1.0c519"
-            ]
-        ]
-    },
-    {
         "id": "c080254a.3a2558",
         "type": "sun events",
         "z": "3060a515.ac9efa",
