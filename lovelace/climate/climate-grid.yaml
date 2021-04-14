@@ -1,0 +1,49 @@
+type: grid
+title: Climate
+columns: 1
+square: false
+cards:
+  - type: weather-forecast
+    entity: weather.home
+  - type: 'custom:mini-graph-card'
+    name: External Temperature History
+    show:
+      state: true
+      legend: false
+      extrema: true
+    group_by: date
+    hours_to_show: 168
+    decimals: 0
+    lower_bound_secondary: 0
+    upper_bound_secondary: 20
+    entities:
+      - entity: sensor.weathertemp
+        aggregate_func: avg
+        name: Average Temp
+      - entity: sensor.weathertemp
+        aggregate_func: max
+        name: High
+      - entity: sensor.weathertemp
+        aggregate_func: min
+        name: Low
+      - entity: sensor.visibility
+        y_axis: secondary
+        aggregate_func: avg
+        color: silver
+    color_thresholds:
+      - value: 0
+        color: '#6f008b'
+      - value: 30
+        color: '#00008B'
+      - value: 40
+        color: '#1E90FF'
+      - value: 50
+        color: '#90EE90'
+      - value: 60
+        color: '#FFD529'
+      - value: 70
+        color: '#FF8B00'
+      - value: 80
+        color: '#F53901'
+      - value: 90
+        color: '#A90101'
