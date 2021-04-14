@@ -1,0 +1,37 @@
+type: grid
+title: Temperature & Humidity
+columns: 1
+square: false
+cards:
+  - type: 'custom:mini-graph-card'
+    name: Temperature
+    decimals: 0
+    show:
+      state: true
+    entities:
+      - entity: sensor.upstairs_temperature
+        name: Upstairs
+        color: '#ffe28c'
+      - entity: sensor.office_temperature
+        name: Office
+        color: '#fc800f'
+      - entity: sensor.downstairs_temperature
+        name: Downstairs
+        color: '#ff3347'
+  - type: 'custom:mini-graph-card'
+    name: Humidity
+    icon: 'mdi:water-percent'
+    points_per_hour: 4
+    show:
+      state: true
+    smoothing: true
+    tap_action:
+      action: navigate
+      navigation_path: /lovelace-status/humidity
+    entities:
+      - entity: sensor.upstairs_humidity
+        name: Upstairs
+        color: '#50C4AA'
+      - entity: sensor.downstairs_humidity
+        name: Downstairs
+        color: '#406599'
