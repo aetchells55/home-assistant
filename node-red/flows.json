@@ -1,0 +1,966 @@
+[
+    {
+        "id": "3060a515.ac9efa",
+        "type": "tab",
+        "label": "Set Colors",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "df60ee29.c9892",
+        "type": "http request",
+        "z": "3060a515.ac9efa",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": false,
+        "url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSfPNLcmDokwddOWBrEdVWvYr9jRbtcUPWjyqd_gYI8yFy7bvphDcNMWYYhr0Spq-DuFqT8Eiw2FKpS/pub?output=csv",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "x": 690,
+        "y": 40,
+        "wires": [
+            [
+                "412731.5b56a8d"
+            ]
+        ]
+    },
+    {
+        "id": "412731.5b56a8d",
+        "type": "csv",
+        "z": "3060a515.ac9efa",
+        "name": "",
+        "sep": ",",
+        "hdrin": true,
+        "hdrout": "all",
+        "multi": "one",
+        "ret": "\\n",
+        "temp": "",
+        "skip": "0",
+        "strings": true,
+        "x": 830,
+        "y": 40,
+        "wires": [
+            [
+                "4279274.b7d08d8"
+            ]
+        ]
+    },
+    {
+        "id": "bcfcdec7.fdf3b",
+        "type": "switch",
+        "z": "3060a515.ac9efa",
+        "name": "Today's Lights",
+        "property": "payload.Date",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "cont",
+                "v": "today",
+                "vt": "flow"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 380,
+        "y": 260,
+        "wires": [
+            [
+                "8106ae7b.f50d4",
+                "fb0a006d.092b9",
+                "80e2f5fd.923d98"
+            ],
+            [
+                "7a28ae86.617aa"
+            ]
+        ],
+        "outputLabels": [
+            "Today Listed",
+            ""
+        ]
+    },
+    {
+        "id": "8106ae7b.f50d4",
+        "type": "function",
+        "z": "3060a515.ac9efa",
+        "name": "Set colors",
+        "func": "//Multiple Lights\nvar rgbarray = global.get('rgbarray')\n\nif (msg.payload.length === 0) {\n    return [msg1,msg2,msg3,msg4,msg5,msg6];\n}\n\nlet necolor = msg.payload.NE;\nlet secolor = msg.payload.SE;\nlet swcolor = msg.payload.SW;\nlet nwcolor = msg.payload.NW;\nlet topcolor = msg.payload.Top;\nlet botcolor = msg.payload.Bottom;\n\nif (necolor.startsWith(\"rgb\")) {\n    necolor = necolor.slice(4,-1);\n    necolor = necolor.split(\",\");\n    msg1 = {payload:\n        {data: {'rgb_color': necolor}}\n    }\n}\nelse {\n    msg1 = {payload:\n        {data: {'color_name': necolor}}\n    }\n}\n\nif (secolor.startsWith(\"rgb\")) {\n    secolor = secolor.slice(4,-1);\n    secolor = secolor.split(\",\");\n    msg2 = {payload: \n        {data: {'rgb_color': secolor}}\n    }\n}\nelse {\n    msg2 =  {payload:\n        {data: {'color_name': secolor}\n    }\n}}\n\nif (swcolor.startsWith(\"rgb\")) {\n    swcolor = swcolor.slice(4,-1);\n    swcolor = swcolor.split(\",\");\n    msg3 = {payload: \n        {data: {'rgb_color': swcolor}}\n    }\n}\nelse {\n    msg3 =  {payload:\n        {data: {'color_name': swcolor}\n    }\n}}\n\nif (nwcolor.startsWith(\"rgb\")) {\n    nwcolor = nwcolor.slice(4,-1);\n    nwcolor = nwcolor.split(\",\");\n    msg4 = {payload: \n        {data: {'rgb_color': nwcolor}}\n    }\n}\nelse {\n    msg4 =  {payload:\n        {data: {'color_name': nwcolor}\n    }\n}}\n\nif (topcolor.startsWith(\"rgb\")) {\n    topcolor = topcolor.slice(4,-1);\n    topcolor = topcolor.split(\",\");\n    msg5 = {payload: \n        {data: {'rgb_color': topcolor}}\n    }\n}\nelse {\n    msg5 =  {payload:\n        {data: {'color_name': topcolor}\n    }\n}}\n\nif (botcolor.startsWith(\"rgb\")) {\n    botcolor = botcolor.slice(4,-1);\n    botcolor = botcolor.split(\",\");\n    msg6 = {payload: \n        {data: {'rgb_color': botcolor}}\n    }\n}\nelse {\n    msg6 =  {payload:\n        {data: {'color_name': botcolor}\n    }\n}}\n\nreturn [msg1,msg2,msg3,msg4,msg5,msg6];",
+        "outputs": 6,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 580,
+        "y": 240,
+        "wires": [
+            [
+                "36721f67.7051d"
+            ],
+            [
+                "628086a2.47a498"
+            ],
+            [
+                "852e39a4.33e5c8"
+            ],
+            [
+                "cb046e59.8a40e"
+            ],
+            [
+                "f2b932b0.216b6"
+            ],
+            [
+                "6f4cb0a1.0c519"
+            ]
+        ],
+        "outputLabels": [
+            "NE",
+            "SE",
+            "SW",
+            "NW",
+            "",
+            ""
+        ]
+    },
+    {
+        "id": "4279274.b7d08d8",
+        "type": "moment",
+        "z": "3060a515.ac9efa",
+        "name": "Set Today",
+        "topic": "",
+        "input": "",
+        "inputType": "date",
+        "inTz": "America/New_York",
+        "adjAmount": 0,
+        "adjType": "days",
+        "adjDir": "add",
+        "format": "L",
+        "locale": "C",
+        "output": "today",
+        "outputType": "flow",
+        "outTz": "America/New_York",
+        "x": 360,
+        "y": 140,
+        "wires": [
+            [
+                "209c0cab.fcea84"
+            ]
+        ]
+    },
+    {
+        "id": "36721f67.7051d",
+        "type": "api-call-service",
+        "z": "3060a515.ac9efa",
+        "name": "NE Light",
+        "server": "8cb8b01f.5a08a",
+        "version": 1,
+        "debugenabled": false,
+        "service_domain": "light",
+        "service": "turn_on",
+        "entityId": "light.sengled_ne",
+        "data": "",
+        "dataType": "json",
+        "mergecontext": "",
+        "output_location": "payload",
+        "output_location_type": "msg",
+        "mustacheAltTags": true,
+        "x": 840,
+        "y": 100,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "628086a2.47a498",
+        "type": "api-call-service",
+        "z": "3060a515.ac9efa",
+        "name": "SE Light",
+        "server": "8cb8b01f.5a08a",
+        "version": 1,
+        "debugenabled": false,
+        "service_domain": "light",
+        "service": "turn_on",
+        "entityId": "light.sengled_se",
+        "data": "",
+        "dataType": "json",
+        "mergecontext": "",
+        "output_location": "",
+        "output_location_type": "none",
+        "mustacheAltTags": false,
+        "x": 840,
+        "y": 160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "852e39a4.33e5c8",
+        "type": "api-call-service",
+        "z": "3060a515.ac9efa",
+        "name": "SW Light",
+        "server": "8cb8b01f.5a08a",
+        "version": 1,
+        "debugenabled": false,
+        "service_domain": "light",
+        "service": "turn_on",
+        "entityId": "light.sengled_sw",
+        "data": "",
+        "dataType": "json",
+        "mergecontext": "",
+        "output_location": "payload",
+        "output_location_type": "msg",
+        "mustacheAltTags": false,
+        "x": 840,
+        "y": 220,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "cb046e59.8a40e",
+        "type": "api-call-service",
+        "z": "3060a515.ac9efa",
+        "name": "NW Light",
+        "server": "8cb8b01f.5a08a",
+        "version": 1,
+        "debugenabled": false,
+        "service_domain": "light",
+        "service": "turn_on",
+        "entityId": "light.sengled_nw",
+        "data": "",
+        "dataType": "json",
+        "mergecontext": "",
+        "output_location": "",
+        "output_location_type": "none",
+        "mustacheAltTags": false,
+        "x": 840,
+        "y": 280,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "3382e2fc.1da15e",
+        "type": "change",
+        "z": "3060a515.ac9efa",
+        "name": "timestamp",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "",
+                "tot": "date"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 530,
+        "y": 40,
+        "wires": [
+            [
+                "df60ee29.c9892"
+            ]
+        ]
+    },
+    {
+        "id": "57ffa75f.9aafb8",
+        "type": "change",
+        "z": "3060a515.ac9efa",
+        "name": "Just turn on the lights",
+        "rules": [
+            {
+                "t": "delete",
+                "p": "payload",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 560,
+        "y": 360,
+        "wires": [
+            [
+                "36721f67.7051d",
+                "628086a2.47a498",
+                "852e39a4.33e5c8",
+                "cb046e59.8a40e",
+                "4390897a.1b8968",
+                "f2b932b0.216b6",
+                "6f4cb0a1.0c519"
+            ]
+        ]
+    },
+    {
+        "id": "c080254a.3a2558",
+        "type": "sun events",
+        "z": "3060a515.ac9efa",
+        "testmode": false,
+        "verbose": true,
+        "topic": "sunset",
+        "name": "sunset",
+        "x": 70,
+        "y": 160,
+        "wires": [
+            [
+                "508e2a27.314b64"
+            ]
+        ],
+        "icon": "node-red-node-suncalc/sun.png"
+    },
+    {
+        "id": "ac266e77.07296",
+        "type": "function",
+        "z": "3060a515.ac9efa",
+        "name": "change rgb",
+        "func": "var i = flow.get(\"i\");\nvar red   = Math.round(Math.sin(0.3*i + 0) * 127 + 128);\nvar green = Math.round(Math.sin(0.3*i + 2) * 127 + 128);\nvar blue  = Math.round(Math.sin(0.3*i + 4) * 127 + 128);\n\ni++;\nif (i>=32) {\n    i = 0;\n}\n\nflow.set(\"i\", i);\n\nmsg.payload = {};\nmsg.payload.data = {};\nmsg.payload.data.rgb_color = [red, green, blue];\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 610,
+        "y": 700,
+        "wires": [
+            [
+                "f350b851.9a61e8",
+                "2963e25.e9c301e",
+                "b4a8b3d6.41f89"
+            ]
+        ]
+    },
+    {
+        "id": "53191480.2bb95c",
+        "type": "inject",
+        "z": "3060a515.ac9efa",
+        "name": "Start Flow",
+        "props": [
+            {
+                "p": "payload",
+                "v": "",
+                "vt": "date"
+            },
+            {
+                "p": "topic",
+                "v": "",
+                "vt": "string"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 160,
+        "y": 640,
+        "wires": [
+            [
+                "4390897a.1b8968"
+            ]
+        ]
+    },
+    {
+        "id": "4390897a.1b8968",
+        "type": "function",
+        "z": "3060a515.ac9efa",
+        "name": "set var",
+        "func": "flow.set(\"i\", 0);\nglobal.set(\"run\", 1);\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 370,
+        "y": 700,
+        "wires": [
+            [
+                "ac266e77.07296"
+            ]
+        ]
+    },
+    {
+        "id": "8e18f53d.94a7d8",
+        "type": "delay",
+        "z": "3060a515.ac9efa",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 620,
+        "y": 840,
+        "wires": [
+            [
+                "ac266e77.07296"
+            ]
+        ]
+    },
+    {
+        "id": "fb0a006d.092b9",
+        "type": "function",
+        "z": "3060a515.ac9efa",
+        "name": "Rotate Today's Lights",
+        "func": "var i = flow.get(\"i\");\nvar necolor = msg.payload.NE;\nvar secolor = msg.payload.SE;\nvar swcolor = msg.payload.SW;\nvar nwcolor = msg.payload.NW;\nvar colorsequence = [necolor, secolor, swcolor, nwcolor];\nvar rgbcolor = \"\";\n\n\nmsg.payload.data = {};\nmsg.payload.counter = i;\nmsg.payload.counterlength = i.length;\nif (colorsequence[i].startsWith(\"rgb\")) {\n    rgbcolor = colorsequence[i].slice(4,-1);\n    rgbcolor = rgbcolor.split(\",\")\n    msg.payload.data.rgb_color = rgbcolor;\n}\nelse {\n    msg.payload.data.color_name = colorsequence[i];\n}\n\ni++;\nif (i>=4) {\n    i = 0;\n}\n\nflow.set(\"i\", i);\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 600,
+        "y": 500,
+        "wires": [
+            [
+                "a7f0ecad.ca63c",
+                "f350b851.9a61e8"
+            ]
+        ]
+    },
+    {
+        "id": "209c0cab.fcea84",
+        "type": "function",
+        "z": "3060a515.ac9efa",
+        "name": "set var",
+        "func": "flow.set(\"i\", 0);\nglobal.set(\"run\", 1);\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 350,
+        "y": 200,
+        "wires": [
+            [
+                "bcfcdec7.fdf3b"
+            ]
+        ]
+    },
+    {
+        "id": "f350b851.9a61e8",
+        "type": "api-call-service",
+        "z": "3060a515.ac9efa",
+        "name": "Landing Light",
+        "server": "8cb8b01f.5a08a",
+        "version": 1,
+        "debugenabled": false,
+        "service_domain": "light",
+        "service": "turn_on",
+        "entityId": "light.sengled_landing",
+        "data": "",
+        "dataType": "json",
+        "mergecontext": "",
+        "output_location": "payload",
+        "output_location_type": "msg",
+        "mustacheAltTags": false,
+        "x": 840,
+        "y": 500,
+        "wires": [
+            [
+                "79ee3c03.273384"
+            ]
+        ]
+    },
+    {
+        "id": "cf9ed838.d46b58",
+        "type": "ha-entity",
+        "z": "3060a515.ac9efa",
+        "name": "Roof",
+        "server": "8cb8b01f.5a08a",
+        "version": 1,
+        "debugenabled": false,
+        "outputs": 2,
+        "entityType": "switch",
+        "config": [
+            {
+                "property": "name",
+                "value": "switch.roof"
+            },
+            {
+                "property": "device_class",
+                "value": ""
+            },
+            {
+                "property": "icon",
+                "value": "mdi:home-lightbulb"
+            },
+            {
+                "property": "unit_of_measurement",
+                "value": ""
+            }
+        ],
+        "state": "payload",
+        "stateType": "msg",
+        "attributes": [],
+        "resend": true,
+        "outputLocation": "",
+        "outputLocationType": "none",
+        "inputOverride": "allow",
+        "x": 370,
+        "y": 60,
+        "wires": [
+            [
+                "3382e2fc.1da15e"
+            ],
+            []
+        ],
+        "outputLabels": [
+            "on",
+            "off"
+        ]
+    },
+    {
+        "id": "3998360b.72f82a",
+        "type": "api-call-service",
+        "z": "3060a515.ac9efa",
+        "name": "Turn Lights Off",
+        "server": "8cb8b01f.5a08a",
+        "version": 1,
+        "debugenabled": false,
+        "service_domain": "light",
+        "service": "turn_off",
+        "entityId": "light.sconce_zha_group_0x0002, light.rooftop_lights_zha_group_0x0003, light.sengled_landing, light.tuyabasementutility",
+        "data": "",
+        "dataType": "json",
+        "mergecontext": "",
+        "output_location": "",
+        "output_location_type": "none",
+        "mustacheAltTags": false,
+        "x": 980,
+        "y": 560,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "7a56d119.26317",
+        "type": "server-state-changed",
+        "z": "3060a515.ac9efa",
+        "name": "Change Switch",
+        "server": "8cb8b01f.5a08a",
+        "version": 1,
+        "exposeToHomeAssistant": false,
+        "haConfig": [
+            {
+                "property": "name",
+                "value": ""
+            },
+            {
+                "property": "icon",
+                "value": ""
+            }
+        ],
+        "entityidfilter": "switch.switch_roof",
+        "entityidfiltertype": "exact",
+        "outputinitially": false,
+        "state_type": "habool",
+        "haltifstate": "true",
+        "halt_if_type": "bool",
+        "halt_if_compare": "is",
+        "outputs": 2,
+        "output_only_on_state_change": false,
+        "x": 100,
+        "y": 80,
+        "wires": [
+            [
+                "cf9ed838.d46b58"
+            ],
+            [
+                "b90f9ff3.dd7fe"
+            ]
+        ]
+    },
+    {
+        "id": "508e2a27.314b64",
+        "type": "switch",
+        "z": "3060a515.ac9efa",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "sunset",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 190,
+        "y": 160,
+        "wires": [
+            [
+                "3a535d6e.e70e92"
+            ]
+        ]
+    },
+    {
+        "id": "b90f9ff3.dd7fe",
+        "type": "link out",
+        "z": "3060a515.ac9efa",
+        "name": "",
+        "links": [
+            "667e139f.0f970c"
+        ],
+        "x": 235,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "667e139f.0f970c",
+        "type": "link in",
+        "z": "3060a515.ac9efa",
+        "name": "",
+        "links": [
+            "b90f9ff3.dd7fe"
+        ],
+        "x": 775,
+        "y": 560,
+        "wires": [
+            [
+                "2ab34792.1afbc8"
+            ]
+        ]
+    },
+    {
+        "id": "382ddfcf.804a2",
+        "type": "inject",
+        "z": "3060a515.ac9efa",
+        "name": "",
+        "props": [
+            {
+                "p": "payload",
+                "v": "",
+                "vt": "date"
+            },
+            {
+                "p": "topic",
+                "v": "",
+                "vt": "string"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 100,
+        "y": 20,
+        "wires": [
+            [
+                "3a535d6e.e70e92"
+            ]
+        ]
+    },
+    {
+        "id": "b4a8b3d6.41f89",
+        "type": "debug",
+        "z": "3060a515.ac9efa",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 850,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "45e10d93.826eb4",
+        "type": "delay",
+        "z": "3060a515.ac9efa",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "10",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 600,
+        "y": 660,
+        "wires": [
+            [
+                "fb0a006d.092b9"
+            ]
+        ]
+    },
+    {
+        "id": "a7f0ecad.ca63c",
+        "type": "api-current-state",
+        "z": "3060a515.ac9efa",
+        "name": "Check Switch",
+        "server": "8cb8b01f.5a08a",
+        "version": 1,
+        "outputs": 2,
+        "halt_if": "true",
+        "halt_if_type": "bool",
+        "halt_if_compare": "is",
+        "override_topic": false,
+        "entity_id": "switch.switch_roof",
+        "state_type": "habool",
+        "state_location": "",
+        "override_payload": "none",
+        "entity_location": "",
+        "override_data": "none",
+        "blockInputOverrides": false,
+        "x": 600,
+        "y": 580,
+        "wires": [
+            [
+                "45e10d93.826eb4"
+            ],
+            [
+                "2ab34792.1afbc8"
+            ]
+        ]
+    },
+    {
+        "id": "2ab34792.1afbc8",
+        "type": "change",
+        "z": "3060a515.ac9efa",
+        "name": "Kill payload",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "true",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 830,
+        "y": 660,
+        "wires": [
+            [
+                "3998360b.72f82a"
+            ]
+        ]
+    },
+    {
+        "id": "3a535d6e.e70e92",
+        "type": "api-call-service",
+        "z": "3060a515.ac9efa",
+        "name": "Roof On",
+        "server": "8cb8b01f.5a08a",
+        "version": 1,
+        "debugenabled": false,
+        "service_domain": "switch",
+        "service": "turn_on",
+        "entityId": "switch.switch_roof",
+        "data": "",
+        "dataType": "json",
+        "mergecontext": "",
+        "output_location": "",
+        "output_location_type": "none",
+        "mustacheAltTags": false,
+        "x": 360,
+        "y": 20,
+        "wires": [
+            [
+                "3382e2fc.1da15e"
+            ]
+        ],
+        "icon": "node-red-contrib-home-assistant-websocket/ha-entity-switch.svg"
+    },
+    {
+        "id": "2963e25.e9c301e",
+        "type": "api-current-state",
+        "z": "3060a515.ac9efa",
+        "name": "Check Switch",
+        "server": "8cb8b01f.5a08a",
+        "version": 1,
+        "outputs": 2,
+        "halt_if": "true",
+        "halt_if_type": "bool",
+        "halt_if_compare": "is",
+        "override_topic": false,
+        "entity_id": "switch.switch_roof",
+        "state_type": "habool",
+        "state_location": "",
+        "override_payload": "none",
+        "entity_location": "",
+        "override_data": "none",
+        "blockInputOverrides": false,
+        "x": 600,
+        "y": 760,
+        "wires": [
+            [
+                "8e18f53d.94a7d8"
+            ],
+            [
+                "2ab34792.1afbc8"
+            ]
+        ]
+    },
+    {
+        "id": "7a28ae86.617aa",
+        "type": "join",
+        "z": "3060a515.ac9efa",
+        "name": "",
+        "mode": "auto",
+        "build": "string",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "accumulate": false,
+        "timeout": "",
+        "count": "",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "",
+        "reduceFixup": "",
+        "x": 310,
+        "y": 320,
+        "wires": [
+            [
+                "10ab7012.f8e2b"
+            ]
+        ],
+        "info": "Takes message sequence of all dates that don't equal today and merges them back into one."
+    },
+    {
+        "id": "79ee3c03.273384",
+        "type": "debug",
+        "z": "3060a515.ac9efa",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1110,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "f2b932b0.216b6",
+        "type": "api-call-service",
+        "z": "3060a515.ac9efa",
+        "name": "Front Top",
+        "server": "17fccfaf.625a2",
+        "version": 1,
+        "debugenabled": false,
+        "service_domain": "light",
+        "service": "turn_on",
+        "entityId": "light.gledopto_sconce_top",
+        "data": "",
+        "dataType": "json",
+        "mergecontext": "",
+        "output_location": "",
+        "output_location_type": "none",
+        "mustacheAltTags": false,
+        "x": 840,
+        "y": 340,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6f4cb0a1.0c519",
+        "type": "api-call-service",
+        "z": "3060a515.ac9efa",
+        "name": "Front Bottom",
+        "server": "17fccfaf.625a2",
+        "version": 1,
+        "debugenabled": false,
+        "service_domain": "light",
+        "service": "turn_on",
+        "entityId": "light.gledopto_sconce_bottom",
+        "data": "",
+        "dataType": "json",
+        "mergecontext": "",
+        "output_location": "",
+        "output_location_type": "none",
+        "mustacheAltTags": false,
+        "x": 850,
+        "y": 400,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "80e2f5fd.923d98",
+        "type": "debug",
+        "z": "3060a515.ac9efa",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 620,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "10ab7012.f8e2b",
+        "type": "api-call-service",
+        "z": "3060a515.ac9efa",
+        "name": "Classic Lights",
+        "server": "17fccfaf.625a2",
+        "version": 1,
+        "debugenabled": false,
+        "service_domain": "scene",
+        "service": "turn_on",
+        "entityId": "scene.classic_lights",
+        "data": "",
+        "dataType": "jsonata",
+        "mergecontext": "",
+        "output_location": "",
+        "output_location_type": "none",
+        "mustacheAltTags": false,
+        "x": 320,
+        "y": 440,
+        "wires": [
+            [
+                "4390897a.1b8968"
+            ]
+        ]
+    },
+    {
+        "id": "8cb8b01f.5a08a",
+        "type": "server",
+        "name": "Home Assistant",
+        "addon": true
+    },
+    {
+        "id": "17fccfaf.625a2",
+        "type": "server",
+        "name": "Home Assistant",
+        "addon": true
+    }
+]
