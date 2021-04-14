@@ -1,0 +1,32 @@
+type: grid
+columns: 2
+title: Heart Monitoring
+cards:
+  - type: 'custom:button-card'
+    entity: sensor.peloton_bpm_3
+    show_state: true
+    name: MYNAME
+    aspect_ratio: 1/1
+    state:
+      - value: 109
+        operator: <=
+        color: 'rgb(80, 196, 170)'
+      - value: 125
+        operator: <=
+        color: 'rgb(182, 201, 92)'
+      - value: 142
+        operator: <=
+        color: 'rgb(250, 203, 62)'
+      - value: 159
+        operator: <=
+        color: 'rgb(252, 128, 15)'
+      - value: 160
+        operator: '>='
+        color: 'rgb(255, 71, 89)'
+  - type: button
+    tap_action:
+      action: toggle
+    entity: automation.peloton_heart_loop
+    icon: 'mdi:heart'
+    show_state: true
+    name: BPM Colors
