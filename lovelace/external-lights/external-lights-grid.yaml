@@ -1,0 +1,10 @@
+type: grid
+title: External Lights
+columns: 1
+square: false
+cards:
+  - type: weather-forecast
+    entity: weather.home
+    secondary_info_attribute: wind_speed
+  - type: entity
+    entity: sensor.nextsunset
