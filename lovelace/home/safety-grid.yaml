@@ -1,0 +1,77 @@
+type: grid
+columns: 1
+title: Safety
+cards:
+  - type: picture-glance
+    entities:
+      - entity: sensor.front_door_battery
+      - entity: sensor.front_door_last_motion
+    camera_image: camera.front_door
+  - type: grid
+    title: Alarm
+    cards:
+      - type: 'custom:button-card'
+        show_name: false
+        size: 100%
+        entity: alarm_control_panel.home
+        show_state: true
+        state:
+          - value: armed_home
+            color: '#50c4aa'
+            icon: 'mdi:shield-home-outline'
+          - value: armed_away
+            color: '#FF3347'
+            icon: 'mdi:shield-lock-outline'
+          - value: disarmed
+            icon: 'mdi:shield-check-outline'
+            color: var(--disabled-text-color)
+      - type: conditional
+        conditions:
+          - entity: alarm_control_panel.home
+            state: disarmed
+        card:
+          type: 'custom:button-card'
+          color: '#50c4aa'
+          size: 100%
+          tap_action:
+            action: call-service
+            service: alarm_control_panel.alarm_arm_home
+            service_data:
+              entity_id: alarm_control_panel.home
+          entity: alarm_control_panel.home
+          name: Arm Home
+          icon: 'mdi:shield-home'
+          show_state: false
+      - type: conditional
+        conditions:
+          - entity: alarm_control_panel.home
+            state: disarmed
+        card:
+          type: 'custom:button-card'
+          color: '#FF3347'
+          size: 100%
+          tap_action:
+            action: call-service
+            service: alarm_control_panel.alarm_arm_away
+            service_data:
+              entity_id: alarm_control_panel.home
+          entity: alarm_control_panel.home
+          icon: 'mdi:shield-lock'
+          name: Arm Away
+      - type: conditional
+        conditions:
+          - entity: alarm_control_panel.home
+            state_not: disarmed
+        card:
+          type: 'custom:button-card'
+          color: var(--paper-item-icon-color)
+          size: 100%
+          tap_action:
+            action: call-service
+            service: alarm_control_panel.alarm_disarm
+            service_data:
+              entity_id: alarm_control_panel.home
+          entity: alarm_control_panel.home
+          name: Disarm
+          icon: 'mdi:shield-off'
+square: false
