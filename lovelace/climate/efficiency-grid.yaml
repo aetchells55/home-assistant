@@ -1,0 +1,25 @@
+type: grid
+title: Efficiency
+columns: 1
+square: false
+cards:
+  - type: 'custom:bar-card'
+    entities:
+      - entity: sensor.hvac_on_ratio
+        direction: right
+        icon: 'mdi:brightness-percent'
+        name: HVAC
+        unit_of_measurement: '% time on'
+        positions:
+          icon: outside
+          value: inside
+        color: orangered
+        animation:
+          state: 'on'
+  - type: history-graph
+    entities:
+      - entity: sensor.hvac_status
+      - entity: sensor.humidifier_status
+    hours_to_show: 24
+    refresh_interval: 0
+    title: HVAC
