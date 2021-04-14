@@ -1,0 +1,12 @@
+type: grid
+title: Front Door
+square: true
+columns: 2
+cards:
+  - type: light
+    entity: light.gledopto_sconce_top
+  - type: light
+    entity: light.sconce_zha_group_0x0002
+    name: Front Door
+  - type: light
+    entity: light.gledopto_sconce_bottom
