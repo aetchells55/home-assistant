@@ -1,0 +1,7 @@
+type: conditional
+conditions:
+  - entity: media_player.basement_tv
+    state: playing
+card:
+  type: media-control
+  entity: media_player.basement_tv
