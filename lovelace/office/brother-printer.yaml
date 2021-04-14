@@ -1,0 +1,73 @@
+title: Brother MFC 5520DW Printer
+type: grid
+columns: 1
+square: false
+cards:
+  - type: grid
+    columns: 4
+    square: true
+    cards:
+      - type: 'custom:bar-card'
+        entities:
+          - entity: sensor.brother_mfc_j5520dw_bk
+        direction: up
+        animation:
+          state: 'on'
+        positions:
+          icon: 'off'
+          name: 'off'
+          value: outside
+          indicator: 'off'
+          minmax: 'off'
+        color: slategray
+      - type: 'custom:bar-card'
+        entities:
+          - entity: sensor.brother_mfc_j5520dw_c
+        direction: up
+        color: cyan
+        positions:
+          name: 'off'
+          value: outside
+          icon: 'off'
+          indicator: 'off'
+          minmax: 'off'
+      - type: 'custom:bar-card'
+        entities:
+          - entity: sensor.brother_mfc_j5520dw_m
+        direction: up
+        color: magenta
+        positions:
+          value: outside
+          minmax: 'off'
+          name: 'off'
+          icon: 'off'
+          indicator: 'off'
+      - type: 'custom:bar-card'
+        entities:
+          - entity: sensor.brother_mfc_j5520dw_y
+        direction: up
+        color: yellow
+        positions:
+          icon: 'off'
+          indicator: 'off'
+          name: 'off'
+          value: outside
+          minmax: 'off'
+        animation:
+          state: 'on'
+  - type: entities
+    entities:
+      - entity: sensor.mfc_j5520dw_b_w_counter
+        name: Black & White Pages
+        secondary_info: last-changed
+      - entity: sensor.mfc_j5520dw_color_counter
+        name: Color Pages
+        secondary_info: last-changed
+        icon: 'mdi:file-document'
+      - entity: sensor.brother_mfc_j5520dw
+        name: Status
+        secondary_info: last-updated
+      - entity: sensor.mfc_j5520dw_uptime
+        name: Uptime
+    state_color: false
+    show_header_toggle: false
