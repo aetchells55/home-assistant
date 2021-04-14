@@ -1,0 +1,9 @@
+type: entities
+entities:
+  - entity: binary_sensor.office_occupancy
+    name: Occupancy
+  - entity: sensor.office_temperature
+    name: Temperature
+title: Office
+icon: 'mdi:desk'
+show_header_toggle: true
