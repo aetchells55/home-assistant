@@ -1,0 +1,38 @@
+type: grid
+title: Roof Deck
+columns: 1
+square: false
+cards:
+  - type: markdown
+    content: >-
+      Today's Lighting Theme: <strong>{{ states('sensor.todays_lights')  }}
+      </strong>
+
+      [Edit Today's
+      Colors](https://docs.google.com/spreadsheets/d/18xMR_pxkL9AyLWi7BROLEf17q43cZcUh7YlfkyvPTl0/edit#gid=0).
+  - type: grid
+    columns: 2
+    cards:
+      - type: picture-entity
+        entity: switch.switch_roof
+        image: /local/images/roof-deck-square.png
+        name: External Lights
+        tap_action:
+          action: toggle
+        hold_action:
+          action: more-info
+      - type: light
+        entity: light.sengled_landing
+        name: Rooftop Landing
+      - type: light
+        entity: light.sengled_nw
+        name: Northwest
+      - type: light
+        entity: light.sengled_ne
+        name: Northeast
+      - type: light
+        entity: light.sengled_sw
+        name: Southwest
+      - type: light
+        entity: light.sengled_se
+        name: Southeast
