@@ -1,0 +1,19 @@
+type: grid
+title: Options
+cards:
+  - type: 'custom:button-card'
+    show_name: true
+    name: Mute
+    entity: input_boolean.mute
+    state:
+      - value: 'on'
+        name: Speakers Muted
+        icon: 'mdi:volume-off'
+      - value: 'off'
+        name: Mute Speakers for 1 Hour
+        icon: 'mdi:volume-high'
+  - type: entity
+    entity: input_datetime.bedtime
+    name: Set Bedtime
+columns: 2
+square: false
