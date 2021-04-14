@@ -1,0 +1,35 @@
+title: Peloton Studio
+type: entities
+show_header_toggle: false
+entities:
+  - entity: light.basement_lights
+    icon: 'mdi:bike-fast'
+    name: Peloton Lights
+  - type: 'custom:rgb-light-card'
+    entity: light.basement_lights
+    justify: around
+    colors:
+      - type: call-service
+        service: script.basement_lights_super_red
+        label: Peloton Red
+        icon_color: 'linear-gradient(15deg, red, deeppink)'
+      - type: call-service
+        service: script.basement_lights_patriotic
+        label: '10, 9, 8, 76ers'
+        icon_color: 'linear-gradient(15deg, blue, red)'
+      - type: call-service
+        service: script.basement_lights_flyered_up
+        label: Flyered Up
+        icon_color: 'linear-gradient(15deg, orangered, orange)'
+      - type: call-service
+        service: script.basement_lights_super_blue
+        label: Super Blue
+        icon_color: 'linear-gradient(15deg, indigo, blue)'
+      - type: call-service
+        service: script.peloton_colorful
+        icon_color: 'linear-gradient(15deg, crimson, aquamarine)'
+        label: Peloton Vibes
+      - type: call-service
+        service: script.basement_lights_white_light
+        icon_color: 'linear-gradient(15deg, #fff8b0, ghostwhite)'
+        label: Lights Up
