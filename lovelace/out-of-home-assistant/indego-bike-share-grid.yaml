@@ -1,0 +1,36 @@
+type: grid
+title: Indego Bike Share
+cards:
+  - type: gauge
+    entity: sensor.indego_indego_3435d381cc6406300bca0f1ba764dc12
+    min: 0
+    max: 16
+    severity:
+      green: 8
+      yellow: 4
+      red: 0
+  - type: gauge
+    entity: sensor.indego_indego_46139aa42051e40cf926fda961b319b5
+    min: 0
+    max: 27
+    severity:
+      green: 9
+      yellow: 4
+      red: 0
+  - type: gauge
+    entity: sensor.indego_indego_a06261ebb0ea149766da85748fab4f0c
+    min: 0
+    max: 18
+    severity:
+      green: 8
+      yellow: 4
+      red: 0
+  - type: gauge
+    entity: sensor.indego_indego_51705ba6d0ed2958f1001d333f4f6ae7
+    min: 0
+    max: 16
+    severity:
+      green: 8
+      yellow: 4
+      red: 0
+columns: 2
