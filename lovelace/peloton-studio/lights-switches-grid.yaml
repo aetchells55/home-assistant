@@ -1,0 +1,24 @@
+type: grid
+title: Lights and Switches
+square: false
+cards:
+  - type: light
+    entity: light.basement_front_lights
+    name: Front Lights
+  - type: light
+    entity: light.basement_back_lights
+    name: Back Lights
+  - type: button
+    name: Basement TV
+    icon: 'mdi:television'
+    entity: switch.tradfri_basement_tv_outlet
+  - type: light
+    entity: light.basement_odd_lights
+    name: Odd Lights
+  - type: light
+    entity: light.basement_even_lights
+    name: Even Lights
+    icon: 'mdi:lightbulb-multiple'
+  - type: light
+    entity: light.tuyabasementutility
+    name: Utility Closet
