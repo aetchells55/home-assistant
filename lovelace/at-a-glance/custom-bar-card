@@ -1,0 +1,14 @@
+type: 'custom:bar-card'
+entities:
+  - entity: sensor.hvac_on_ratio
+    direction: right
+    icon: 'mdi:brightness-percent'
+    name: HVAC
+    unit_of_measurement: '% time on'
+    positions:
+      icon: outside
+      value: inside
+    color: orangered
+    animation:
+      state: 'on'
+title: HVAC Usage
