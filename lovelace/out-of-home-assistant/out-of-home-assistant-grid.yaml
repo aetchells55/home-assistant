@@ -1,0 +1,43 @@
+type: grid
+title: Out of Home Assistant
+cards:
+  - type: entities
+    entities:
+      - entity: sensor.time_to_nj
+        icon: 'mdi:car-sports'
+        name: Time to New Jersey
+      - entity: sensor.time_to_airport
+        icon: 'mdi:airport'
+        name: Time to Airport
+    title: Travel Times
+  - type: entity-filter
+    entities:
+      - entity: sensor.phl_delays
+        icon: 'mdi:airplane'
+      - entity: binary_sensor.phl_departure_delay
+      - entity: binary_sensor.phl_ground_delay
+      - entity: binary_sensor.phl_ground_stop
+      - entity: binary_sensor.phl_closure
+    state_filter:
+      - 'on'
+      - No delay at PHL
+    card:
+      type: entities
+      title: PHL Status
+  - type: markdown
+    content: >-
+      <ha-icon icon="mdi:train" ></ha-icon>  **Next Train:** {{
+      states.sensor.amtrak.attributes.origin_station_stop_name }} to {{
+      states.sensor.amtrak.attributes.destination_station_stop_name }}
+
+
+      **[{{ states.sensor.amtrak.attributes.trip_trip_short_name }} {{
+      states.sensor.amtrak.attributes.route_route_long_name }}]({{
+      states.sensor.amtrak.attributes.route_route_url }})**
+
+      {{
+      as_timestamp(states.sensor.amtrak.attributes.origin_stop_departure_time) |
+      timestamp_custom(' %I:%M %p') | replace(" 0", "") }}
+    title: Amtrak
+columns: 1
+square: false
