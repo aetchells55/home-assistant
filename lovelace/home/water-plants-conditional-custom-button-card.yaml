@@ -1,0 +1,11 @@
+type: conditional
+conditions:
+  - entity: input_boolean.water_plants
+    state: 'on'
+card:
+  type: 'custom:button-card'
+  entity: input_boolean.water_plants
+  icon: 'mdi:watering-can-outline'
+  name: Water Plants
+  show_state: false
+  layout: icon_state_name2nd
