@@ -1,0 +1,7 @@
+type: history-graph
+entities:
+  - entity: sensor.hvac_status
+  - entity: sensor.humidifier_status
+hours_to_show: 24
+refresh_interval: 0
+title: Efficiency
