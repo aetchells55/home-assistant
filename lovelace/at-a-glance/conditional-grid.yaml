@@ -1,0 +1,57 @@
+type: grid
+cards:
+  - type: conditional
+    conditions:
+      - entity: input_boolean.water_plants
+        state: 'on'
+    card:
+      title: Eagles
+      type: 'custom:button-card'
+      entity: input_boolean.water_plants
+      icon: 'mdi:watering-can-outline'
+      name: Water Plants
+      show_state: true
+  - type: conditional
+    conditions:
+      - entity: sensor.nhl_game_day
+        state: 'on'
+    card:
+      type: entities
+      entities:
+        - entity: sensor.nhl_sensor
+          name: Flyers
+          icon: 'mdi:hockey-puck'
+        - entity: sensor.nhl_away_team
+        - entity: sensor.nhl_home_team
+  - type: conditional
+    conditions:
+      - entity: sensor.phillies_game_status
+        state_not: unavailable
+    card:
+      type: entities
+      entities:
+        - entity: sensor.phillies_game_status
+          name: Phillies
+          icon: 'mdi:baseball-diamond'
+        - entity: sensor.phillies_away_score
+        - entity: sensor.phillies_home_score
+  - type: conditional
+    conditions:
+      - entity: sensor.doorbell_battery_status
+        state_not: good
+    card:
+      type: 'custom:button-card'
+      entity: sensor.front_door_battery
+      show_state: true
+      state:
+        - value: 20
+          operator: '>'
+          color: '#50C4AA'
+        - value: 10
+          operator: '>'
+          color: '#FACB3E'
+        - value: 0
+          operator: '>='
+          color: '#FF4759'
+columns: 1
+square: false
