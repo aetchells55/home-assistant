@@ -1,0 +1,36 @@
+type: grid
+title: Traffic Cams
+cards:
+  - type: picture-entity
+    entity: camera.i_76_west_at_city_ave
+    show_state: false
+    name: I-76 Westbound
+    tap_action:
+      action: navigate
+      navigation_path: /traffic-cameras/i-76-westbound
+    hold_action:
+      action: more-info
+  - type: picture-entity
+    entity: camera.291_south_to_airport
+    show_state: false
+    name: To Airport / Walt Whitman Bridge
+    tap_action:
+      action: navigate
+      navigation_path: /traffic-cameras/airport
+    hold_action:
+      action: more-info
+  - type: picture-entity
+    entity: camera.i_676_at_i_76
+    name: I-676
+    show_state: false
+  - type: picture-entity
+    entity: camera.i_95_north_at_indiana_street
+    show_state: false
+    name: I-95 North
+    tap_action:
+      action: navigate
+      navigation_path: /traffic-cameras/676-to-95
+    hold_action:
+      action: more-info
+columns: 2
+square: false
