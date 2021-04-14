@@ -1,0 +1,29 @@
+type: 'custom:mini-graph-card'
+name: 24-Hour Front Door Motion
+entities:
+  - entity: binary_sensor.front_door_motion
+hours_to_show: 24
+group_by: hour
+aggregate_func: sum
+show:
+  graph: bar
+state_map:
+  - value: 'off'
+    label: Clear
+  - value: 'on'
+    label: Detected
+color_thresholds:
+  - color: var(--card-background-color)
+    value: 0
+  - color: '#406599'
+    value: 0.9
+  - color: '#50C4AA'
+    value: 3
+  - color: '#B6C95C'
+    value: 5
+  - color: '#FACB3E'
+    value: 7
+  - color: '#FC800F'
+    value: 9
+  - color: '#FF4759'
+    value: 11
